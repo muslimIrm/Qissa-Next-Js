@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+
+.logo{
+    @apply  xl:text-6xl text-5xl leading-[1.5] text-[var(--primary-color)] w-full;
+}
+
+ul{
+    @apply flex items-center text-center justify-between w-full;
+}
+
+ul li{
+    @apply sm:text-2xl max-md:text-lg md:text-xl text-[var(--heading-color)] hover:text-[var(--primary-color)] transition-all duration-300 !border-b-2 border-transparent hover:!border-[var(--primary-color)]
+}
+ul li a{
+    width: 100%;
+}
+.true{
+    font-size: 1.6rem;
+}
+.menu{
+        display: none;
+    }
+@media (max-width: 720px) {
+    .menu{
+        display: flex;
+    }
+    ul{
+        position: absolute;
+        top: 0;
+        left: 6%;
+        margin-top: 6.5rem;
+        width: 60vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        border-radius: 1.3rem;
+        background-color: var(--second-color);
+        display: none;
+    }
+    ul.show{
+        display: flex;
+    }
+}

@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.home{
+    @apply w-full min-h-dvh py-5 flex items-center justify-center bg-[var(--second-color)] overflow-x-hidden;
+}
+.container{
+    @apply flex flex-col-reverse md:flex-row md:justify-between ; 
+}
+.content{
+    @apply flex flex-col w-full md:py-30  gap-7;
+}
+.content h1{
+    @apply text-7xl mb-2;
+}
+.content p{
+    @apply text-xl leading-[1.7] mb-4;
+}
+
+.image{
+    @apply flex items-center justify-center w-full md:pt-0 pt-[5rem] pb-[1rem]
+}
