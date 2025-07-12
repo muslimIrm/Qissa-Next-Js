@@ -21,11 +21,11 @@ ul li a{
 .menu{
         display: none;
     }
-@media (max-width: 720px) {
+@media (max-width: 875px) {
     .menu{
         display: flex;
     }
-    ul{
+    .nav{
         position: absolute;
         top: 0;
         left: 6%;
@@ -40,7 +40,27 @@ ul li a{
         background-color: var(--second-color);
         display: none;
     }
-    ul.show{
+    .nav .btns{
+        flex-direction: column;
+    }
+    .nav ul{
         display: flex;
+        flex-direction: column;
+    }
+    .nav ul li{
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid black;
+        padding: .5rem 0;
+    }
+    
+    .nav.show{
+        display: flex;
+    }
+}
+
+@media (min-width: 585px){
+    .nav .btns{
+        flex-direction: row;
     }
 }

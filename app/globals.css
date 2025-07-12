@@ -21,7 +21,6 @@ body {
   scroll-behavior: smooth;
   background-color: var(--background);
   color: var(--text-color);
-  font-family: var(--font-body), sans-serif;
 }
 
 
@@ -31,6 +30,8 @@ body {
   direction: rtl;
   text-decoration: none;
   z-index: 1;
+  font-family: var(--font-body), sans-serif !important;
+
 }
 
 .container {
@@ -45,25 +46,27 @@ section {
 h1{
 
   color: var(--primary-color);
-  font-family: var(--font-heading), sans-serif;
+  font-family: var(--font-heading), sans-serif !important;
 }
 
-.logo {
-  font-family: var(--font-heading), sans-serif;
+.logo a{
+  font-family: var(--font-heading), sans-serif !important;
 }
 .verse{
   font-family: var(--font-verse), sans-serif !important;
 }
 
+
 .btn{
-  @apply inline-block px-6 py-5 md:px-7 md:text-lg rounded-2xl bg-[var(--primary-color)] max-w-max 
-  text-[var(--second-color)] lg:text-xl font-bold transition-all transform hover:-translate-y-1;
+  @apply !inline-block !px-6 !py-5 md:!px-7 md:!text-lg !rounded-2xl !bg-[var(--primary-color)] !max-w-max 
+  !text-[var(--second-color)] lg:!text-xl !font-bold !transition-all !transform hover:!-translate-y-1;
 }
 .btn-out{
 
-  @apply !inline-block px-6 py-5  md:text-lg  rounded-2xl border-2 border-[var(--primary-color)] max-w-max 
-  hover:text-[var(--second-color)] lg:text-xl  font-bold transition-all  hover:bg-[var(--primary-color)] text-[var(--primary-color)];
+  @apply !inline-block !px-6 !py-5  md:!text-lg  !rounded-2xl !border-2 !border-[var(--primary-color)] !max-w-max 
+  hover:!text-[var(--second-color)] lg:!text-xl  !font-bold !transition-all  hover:!bg-[var(--primary-color)] !text-[var(--primary-color)];
 }
+
 
 .title{
   @apply w-full flex justify-center items-center text-4xl mt-5
