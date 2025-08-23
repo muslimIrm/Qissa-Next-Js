@@ -1,7 +1,6 @@
 
 import Image from "next/image";
 
-
 function HomeImage() {
 
     return (
@@ -21,11 +20,11 @@ function BgImage() {
     return (
         <>
             <Image
-                src="/bg.webp"
+                src={"/bg.webp"}
                 width={896}
                 height={600}
                 alt="background"
-                className="absolute bottom-0 right-0 opacity-9"
+                className="absolute bottom-0 right-0 opacity-9 !z-[100]"
                 style={{ zIndex: -1 }}
                 priority
             />

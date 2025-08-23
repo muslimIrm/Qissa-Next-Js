@@ -5,14 +5,13 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { Modal, Typography, TextField, Button, Box } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
-import URL from "../../URL";
+import URL from "@/app/URL";
 import ErrorLoading from "@/app/  components/Basic_Components/ErrorLoading";
 import Loading from "@/app/  components/Basic_Components/Loading";
 import Header from "@/app/  components/Basic_Components/stories/Header";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { RSCPathnameNormalizer } from "next/dist/server/normalizers/request/rsc";
 
 const modalStyle = {
   position: 'absolute',
@@ -64,7 +63,7 @@ const Story = () => {
 
   const router = useRouter();
   const { id } = useParams();
-  const [user, setUser] = useState({ fullname: "جار التحميل...", username: "" });
+
   const [state, setState] = useState(true)
 
   // ✅ Initialize auth once
@@ -73,6 +72,9 @@ const Story = () => {
     const userId = localStorage.getItem("id");
     setAuth({ token, userId });
   }, []);
+  const [user, setUser] = useState({ fullname: "جار التحميل...", username: "" });
+
+
 
   // ✅ Fetch story data
   const fetchStory = useCallback(async () => {
@@ -102,11 +104,6 @@ const Story = () => {
       toast.error("حدث خطأ في تحميل القصة");
     }
   }, [id]);
-
-  useEffect(() => {
-    if (id) fetchStory();
-  }, [fetchStory, storyState.reload]);
-
   const { data: story } = storyState;
   useEffect(() => {
   if(story) {
@@ -117,6 +114,10 @@ const Story = () => {
     }
   }
 }, [story]);
+  useEffect(() => {
+    if (id) fetchStory();
+  }, [fetchStory, storyState.reload]);
+
   // ✅ Memoized computed values
   const formattedDate = useMemo(() => {
     if (!storyState.data?.createdAt) return '';
@@ -241,6 +242,7 @@ const Story = () => {
   if (storyState.error) return <ErrorLoading onClick={handleRetry} />;
   if (!storyState.data) return null;
 
+  
 
   return (
     <>
@@ -248,7 +250,7 @@ const Story = () => {
 
       <div className="!pt-[90px] !pb-16 flex items-center justify-center w-full">
         <div className="container max-w-5xl mx-auto !px-4 !flex items-center !justify-center">
-          {(state || (!state && isOwner)) ?
+          
             <div className="bg-[var(--second-color)] rounded-2xl shadow-lg !p-6 !space-y-8 !w-full">
 
               {/* User Info Header */}
@@ -265,7 +267,7 @@ const Story = () => {
                   />
                   <div className="flex flex-col gap-1">
                     <h3 className="font-bold">{user.fullname}</h3>
-                    <span className="!text-sm">@{user.username}</span>
+                    <span className="!text-sm">{user.username}</span>
                   </div>
                 </div>
 
@@ -274,7 +276,7 @@ const Story = () => {
                 </div>
 
                 {/* Options Menu - Only for owner */}
-                {isOwner && (
+                (
                   <div className="absolute left-0">
                     <BsThreeDotsVertical
                       onClick={toggleOptions}
@@ -297,7 +299,7 @@ const Story = () => {
                       </div>
                     )}
                   </div>
-                )}
+                )
               </div>
 
               {/* Story Title */}
@@ -320,8 +322,8 @@ const Story = () => {
                 </p>
               </div>
             </div>
-            : <div className="!flex items-center justify-center !w-full">هذه قصة خاصة لا يمكنك قراءتها.</div>
-          }
+            
+          
         </div>
       </div>
 

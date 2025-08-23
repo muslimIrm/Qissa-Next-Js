@@ -3,32 +3,33 @@
 
 /* ✅ حاوية المحتوى */
 .content {
-  @apply !flex !flex-col !gap-6;
+  @apply !flex !flex-col !gap-6 ;
 }
 
 /* ✅ الكارد */
 .card {
-  @apply !flex max-sm:!flex-col-reverse !gap-6 !bg-[var(--second-color)] !w-full !justify-between !rounded-2xl !py-6 !px-8;
+  @apply !flex  !gap-6 !bg-[var(--second-color)] !w-full !justify-between !rounded-2xl !py-6 !px-8 border-1 border-[var(--background)];
 }
 
 /* ✅ قسم النصوص داخل الكارد */
 .content-card {
-  @apply !flex !flex-col !gap-4;
+  @apply !flex !flex-col !gap-4 flex-1;
 }
 
 /* ✅ العنوان */
 .title-card {
-  @apply !text-2xl md:!text-[28px] !font-semibold;
+  @apply !text-2xl md:!text-[28px] !font-semibold max-md:!text-[18px]; 
 }
 
 /* ✅ نص القصة */
 .description-card {
-  @apply !text-base md:!text-lg max-md:!text-sm !text-justify;
+  @apply text-base md:text-lg max-md:text-sm text-justify overflow-hidden max-md:!text-[14px];
+  @apply line-clamp-4;
 }
 
 /* ✅ حاوية الصورة */
 .image-card {
-  @apply !w-full md:!w-[350px] !aspect-square !overflow-hidden !rounded-2xl !bg-[var(--background)] !flex !items-center !justify-center;
+  @apply flex-shrink-0 md:!w-[250px] max-md:!w-[55%] max-md:!h-[250px] md:!h-[300px] !aspect-square !overflow-hidden !rounded-2xl !bg-[var(--background)] !flex !items-center !justify-center;
 }
 
 
@@ -37,7 +38,17 @@
   @apply !w-full !h-full !object-cover !rounded-2xl;
 }
 
+.surce-card{
+  @apply max-md:line-clamp-1;
+}
 /* ✅ رابط "اقرأ المزيد" */
 .read-more {
   @apply !text-base !text-[var(--primary-color)] hover:!underline !self-start !transition;
+}
+
+.css-19kzrtu{
+  width: 100% !important;
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }

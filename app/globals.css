@@ -29,7 +29,6 @@ body {
   list-style: none;
   direction: rtl;
   text-decoration: none;
-  z-index: 1;
   font-family: var(--font-body), sans-serif !important;
 
 }

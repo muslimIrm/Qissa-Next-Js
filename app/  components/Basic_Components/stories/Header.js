@@ -4,7 +4,7 @@ import { TfiBackRight } from "react-icons/tfi";
 export default function Header({ path }) {
     return (
         <>
-            <div className="fixed top-0 !z-50 w-full py-3 bg-[var(--second-color)] border-b border-[var(--primary-color)]">
+            <div className="fixed top-0 !z-[20] w-full py-3 bg-[var(--second-color)] border-b border-[var(--primary-color)]">
                 <div className="container relative h-[60px]">
 
                     {/* زر الرجوع */}

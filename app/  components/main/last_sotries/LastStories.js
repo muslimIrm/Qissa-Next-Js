@@ -8,7 +8,7 @@ import URL from "../../../URL"
 import Loading from "../../Basic_Components/Loading"
 import ErrorLoading from "../../Basic_Components/ErrorLoading"
 import Link from "next/link"
-import StoryMap from "./Components/storiesMap"
+import StoryMap from "./Components/storiesMap";
 function LastStories(){
     const [stories, setStories] = useState([])
 

@@ -7,7 +7,9 @@ import { FaBars } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
-
+import { useCreateStoryButton } from "@/app/contexts/CreatStoryContext";
+import { useIsAuthenticated } from "@/app/contexts/IsAuthenticatedContext";
+import Link from "next/link";
 // MUI
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -32,48 +34,27 @@ const style = {
 
 
 function Header() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const { isAuthenticated, setIsAuthenticated } = useIsAuthenticated()
+    const [imageUrl, setImageUrl] = useState(null)
 
-    const token = localStorage.getItem("token") ? localStorage.getItem("token") : false
+    const [token, setToken] = useState(null);
+    useEffect(() => { setToken(localStorage.getItem("token")) }, [])
 
-
-
-    // verify tokne & user
     useEffect(() => {
-        const verifyToken = async () => {
-            if (token) {
-                try {
-                    const auth = `Bearer ${token}`
+        const user = JSON.parse(localStorage.getItem("user"))
 
-                    const result = await axios.post(`${URL}api/verifytoken`, {}, {
-                        headers: {
-                            Authorization: auth
-                        }
-                    })
-
-                    // const user = result.response.data.user;
-
-                    setIsAuthenticated(!!token);
-                    setImageUrl(result.data.user.account_icon)
-                    console.log(result.data.message)
-                    toast.success("انت مسجل دخول بنجاح!")
-                } catch (error) {
-                    console.log(error)
-                    if (error.message === "Network Error") {
-                        toast.error("خطأ في الاتصال بالخادم، يرجى التحقق من اتصالك بالإنترنت.")
-                        return;
-                    }
-                    toast.error(error.response.data.message)
-
-                }
-            } else {
-                setIsAuthenticated(!!token)
-            }
-
+        let savedImage;
+        if (user) {
+            savedImage = user.account_icon
 
         }
-        verifyToken();
-    }, []);
+        if (savedImage) {
+            setImageUrl(savedImage)
+        }
+    }, [])
+
+    // verify tokne & user
+
 
 
     const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -96,7 +77,7 @@ function Header() {
     };
     const handleCloseRegister = () => setOpenRegister(false);
 
-    const [imageUrl, setImageUrl] = useState(null)
+
     // Login
 
     const [email, setEmail] = useState("")
@@ -113,10 +94,15 @@ function Header() {
             if (result.data.user.account_icon) {
                 setImageUrl(result.data.user.account_icon)
             }
+            localStorage.setItem("user", JSON.stringify(result.data.user))
             toast.success(result.data.message)
             const userToken = result.data.token
             localStorage.setItem("token", userToken)
+            localStorage.setItem("id", result.data.user._id)
+
             setIsAuthenticated(true)
+
+
 
         } catch (error) {
             console.log(error)
@@ -147,6 +133,7 @@ function Header() {
         formdata.append("password", passwordR);
         formdata.append("fullname", fullname);
         formdata.append("username", username);
+        console.log(image)
         if (image) {
             formdata.append("account_icon", image);
         }
@@ -157,12 +144,16 @@ function Header() {
             console.log(result)
             if (result.data.user.account_icon) {
                 setImageUrl(result.data.user.account_icon)
-                console.log(result.data.user.account_icon)
             }
+            localStorage.setItem("user", JSON.stringify(result.data.user))
             toast.success(result.data.message)
             const userToken = result.data.token
             localStorage.setItem("token", userToken)
+            localStorage.setItem("id", result.data.user._id)
+
             setIsAuthenticated(true)
+
+
 
 
         } catch (error) {
@@ -191,9 +182,10 @@ function Header() {
                 }
             })
 
-            localStorage.removeItem("token")
+            localStorage.clear()
             setIsAuthenticated(false)
             toast.success(result.data.message)
+
 
 
         } catch (error) {
@@ -207,11 +199,11 @@ function Header() {
     }
 
     return (
-        <div className=" fixed w-full bg-[var(--second-color)] !z-50">
+        <div className=" fixed w-full bg-[var(--second-color)] !z-50 !h-[100px]">
 
             <div className="container">
 
-                <nav className="!w-full flex items-center justify-bettwen gap-5 relative">
+                <nav className="!w-full flex items-center justify-bettwen gap-x-5 relative">
                     {/* Logo Header */}
                     <div className="logo flex-[0_0_20%]">
                         <a href="#home">قصة</a>
@@ -227,23 +219,25 @@ function Header() {
 
                         </ul>
 
-                        <div className="flex items-center justify-center gap-4 !w-full h-full btns">
+                        <div className="flex items-center justify-center gap-x-4 !w-full h-full btns">
 
                             {!isAuthenticated ? (
-                                <div className={"flex items-center justify-center gap-4"}>
-                                    <Button href="#login" onClick={handleOpen} className="btn md:!py-3 md:!px-3 !py-2 !px-3 max-lg:!text-[16px] !text-lg !rounded-lg  ">تسجيل الدخول</Button>
-                                    <Button href="#register" onClick={handleOpenRegister} className="btn-out md:!py-3 md:!px-3 !py-2 !px-3 max-lg:!text-[16px] !text-lg !rounded-lg  ">إنشاء حساب</Button>
+                                <div className={"flex items-center justify-center gap-4 !px-1"}>
+                                    <Button onClick={handleOpen} className="btn md:!py-3 max-md:!text-[14px] md:!px-3 !py-2 !px-3 max-lg:!text-[16px] !text-lg !rounded-lg  ">تسجيل الدخول</Button>
+                                    <Button onClick={handleOpenRegister} className="btn-out max-md:!text-[14px] md:!py-3 md:!px-3 !py-2 !px-3 max-lg:!text-[16px] !text-lg !rounded-lg  ">إنشاء حساب</Button>
 
                                 </div>
                             ) : (
                                 <div className="flex items-center justify-center gap-4">
-                                    <Image src={!imageUrl ? "/prfilo-Icon.png" : imageUrl}
-                                        width={50}
-                                        height={50}
-                                        alt="prfilo_image"
-                                        className=" !rounded-full !w-[50px] !h-[50px]"
-                                    />
-                                    <Button href="#logout" onClick={logout} className="btn  md:!py-3 md:!px-3 !py-2 !px-3 max-sm:!text-[16px] !text-lg !rounded-lg !bg-red-800">تسجيل الخروج</Button>
+                                    <Link href={"/profile"}>
+                                        <Image src={!imageUrl ? "/prfilo-Icon.png" : imageUrl}
+                                            width={50}
+                                            height={50}
+                                            alt="prfilo_image"
+                                            className=" !rounded-full !w-[50px] !h-[50px]"
+                                        />
+                                    </Link>
+                                    <Button href="#logout" onClick={logout} className="btn max-md:!text-[14px] md:!py-3 md:!px-3 !py-2 !px-3 max-sm:!text-[16px] !text-lg !rounded-lg !bg-red-800">تسجيل الخروج</Button>
                                 </div>
 
                             )}
@@ -296,7 +290,9 @@ function Header() {
                         className="!text-right !font-[var(--font-body)]"
                         fullWidth />
                     <TextField id="fullname" label="الصورة الشخصية"
-                        type="file" onChange={(e) => setImage(e.target.file[0])}
+                        type="file" onChange={(e) => {
+                            setImage(e.target.files[0])
+                        }}
                         className="!text-right !font-[var(--font-body)]"
                         fullWidth />
                     <TextField id="username" label="اسم المستخدم"

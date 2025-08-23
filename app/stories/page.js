@@ -9,6 +9,8 @@ import Loading from "../  components/Basic_Components/Loading";
 import ErrorLoading from "../  components/Basic_Components/ErrorLoading";
 import Header from "../  components/Basic_Components/stories/Header";
 import StoryMap from "../  components/main/last_sotries/Components/storiesMap";
+import FabButton from "../  components/main/fabButton/Fab";
+import { CreateStoryButtonProvider } from "../contexts/CreatStoryContext";
 const stories = () => {
     const [stories, setStories] = useState([])
 
@@ -21,6 +23,7 @@ const stories = () => {
 
     const [error, setError] = useState(false);
 
+    const [state] = useState("published")
     useEffect(() => {
         async function fetchData() {
             console.log("pages is:", page)
@@ -29,7 +32,7 @@ const stories = () => {
             setLoading(true)
             console.log(hasMore)
             try {
-                const res = await axios.get(`${URL}api/stories?limit=${limit}&page=${page}`)
+                const res = await axios.get(`${URL}api/stories?limit=${limit}&page=${page}&state=${state}`)
                 const newStories = await res.data.storiesRaw
                 setStories(prev => {
                     const existingIds = new Set(prev.map(s => s._id));
@@ -75,35 +78,37 @@ const stories = () => {
     }, [hasMore, loading])
 
     return (
-        <>
-            {/* رأس الصفحة */}
-            <Header path="/"/>
+            <>
+                {/* رأس الصفحة */}
+                <Header path="/"/>
 
-            <div className="felx w-full !h-dvh">
-                <div className="content container !h-full">
-                    <div className="stories container flex !flex-col gap-4 !mt-24">
-                        <StoryMap stories={stories}/>
+                <div className="felx w-full !h-dvh !pt-[90px]">
+                    <div className="content container !h-full">
+                        <div className="stories container flex !flex-col gap-4">
+                            <StoryMap stories={stories} state={state}/>
 
-                        {loading && (<Loading />)}
+                            {loading && (<Loading />)}
 
-                        {error && (
-                            <ErrorLoading onClick={() => {
-                                setError(false);
-                                setLoading(false);
-                                setHasMore(true);
-                                setReload((prev) => !prev)
-                                setPage(1);
-                                setStories([]);
-                            }} />
-                        )}
+                            {error && (
+                                <ErrorLoading onClick={() => {
+                                    setError(false);
+                                    setLoading(false);
+                                    setHasMore(true);
+                                    setReload((prev) => !prev)
+                                    setPage(1);
+                                    setStories([]);
+                                }} />
+                            )}
 
-                        {hasMore === false && (
-                            <span className="text-center">لا توجد قصص اضافية حاليًا.</span>
-                        )}
+                            {hasMore === false && (
+                                <span className="text-center">لا توجد قصص اضافية حاليًا.</span>
+                            )}
+                            <FabButton/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </>
+            
+            </>
     );
 }
 
