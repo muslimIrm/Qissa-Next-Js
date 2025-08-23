@@ -372,7 +372,10 @@ const Story = () => {
             تعديل القصة
           </Typography>
 
-          <div className="!space-y-4">
+          <div className="!space-y-4 !h-full" 
+          style={{overflowY: "auto"}}
+          
+          >
             {/* Title Field */}
             <TextField
               label="عنوان القصة"

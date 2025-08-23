@@ -49,10 +49,11 @@ const CreateStory = ({ open, onClose, onSubmit }) => {
       aria-describedby="modal-story-description"
     >
     <div 
-        style={{ ...style, fontFamily: "var(--font-body)" }}>
+        style={{ ...style, fontFamily: "var(--font-body)" }} className="!max-h-[90vh]">
       <form
+        style={{overflowY: "auto"}}
         onSubmit={handleSubmit}
-        className="!flex-col !flex !items-center !justify-center !space-y-3 !w-full"
+        className="!flex-col !h-full  !flex !items-center !justify-center !space-y-3 !w-full"
       >
         <Typography
           id="modal-story-title"
