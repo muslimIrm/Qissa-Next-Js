@@ -28,7 +28,11 @@ const modalStyle = {
   maxWidth: '90vw',
   maxHeight: '90vh',
   overflow: 'auto',
-  gap: "1rem"
+  gap: "1rem",
+  width: "90%",             // مخصص للشاشات الصغيرة
+  maxWidth: "600px",        // أقصى عرض
+  maxHeight: "90vh",        // أقصى ارتفاع للـ Modal
+  overflowY: "auto",        // السماح بالتمرير عند زيادة المحتوى
 };
 
 const Story = () => {
