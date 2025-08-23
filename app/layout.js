@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
               name="description"
               content="قصة، موقع يعرض قصص العلماء و يساهم في نشر سيرتهم المباركة."
             />
+            <meta name="google-site-verification" content="mRiXU7sn0rxHuFB4dpy0LUEHTsd6UTtd7isT5nrK8bI" />
             {/* Google Analytics */}
             <Script
               async
