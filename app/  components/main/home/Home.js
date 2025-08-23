@@ -10,14 +10,14 @@ function Main() {
         <section className="home relative overflow-hidden" id="home">
             <div className="container !flex !justify-between gap-10">
                 <div className="content ">
-                    <div>
+                    <div className="!z-[10]">
                         <Content />
                     </div>
-                    <div className="flex gap-6 max-md:flex-col">
+                    <div className="flex gap-6 max-md:flex-col !z-[10]">
                         <Buttons />
                     </div>
 
-                    <div className=" absolute bottom-5 max-sm:hidden">
+                    <div className=" absolute bottom-5 max-sm:hidden !z-[10]">
                         <h2>الموقع قيد التطوير</h2>
                         <h3>نبذل اقصى الجهود لتقديم الموقع بالصورى الفضلى، شاكرين صبركم.</h3>
                     </div>

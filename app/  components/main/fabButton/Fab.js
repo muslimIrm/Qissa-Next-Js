@@ -59,7 +59,7 @@ function FabButton() {
             <Fab
                 color="primary"
                 aria-label="add"
-                className={` !fixed !bottom-15 md:!right-16 sm:!right-10`}
+                className={` !fixed !bottom-15 md:!right-16 md:!right-10 max-md:!right-6`}
                 style={{ display: isAuthenticated ? "flex" : "none" }}
                 onClick={handleOpen}
             >

@@ -14,6 +14,10 @@ const style = {
   padding: "30px 20px",
   display: "flex",
   fontFamily: "var(--font-cairo)",
+  width: "90%",             // مخصص للشاشات الصغيرة
+  maxWidth: "600px",        // أقصى عرض
+  maxHeight: "90vh",        // أقصى ارتفاع للـ Modal
+  overflowY: "auto",        // السماح بالتمرير عند زيادة المحتوى
 }
 
 const CreateStory = ({ open, onClose, onSubmit }) => {
@@ -44,10 +48,11 @@ const CreateStory = ({ open, onClose, onSubmit }) => {
       aria-labelledby="modal-story-title"
       aria-describedby="modal-story-description"
     >
+    <div 
+        style={{ ...style, fontFamily: "var(--font-body)" }}>
       <form
         onSubmit={handleSubmit}
-        style={{ ...style, fontFamily: "var(--font-body)" }}
-        className="!flex-col items-center justify-center gap-4 w-[30vw] max-lg:w-[40vw] max-md:w-[60vw] max-sm:!w-[90vw]"
+        className="!flex-col !flex !items-center !justify-center !space-y-3 !w-full"
       >
         <Typography
           id="modal-story-title"
@@ -106,6 +111,8 @@ const CreateStory = ({ open, onClose, onSubmit }) => {
           إنشاء القصة
         </Button>
       </form>
+
+    </div>
     </Modal>
   );
 };

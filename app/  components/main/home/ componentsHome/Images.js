@@ -24,7 +24,7 @@ function BgImage() {
                 width={896}
                 height={600}
                 alt="background"
-                className="absolute bottom-0 right-0 opacity-9 !z-[100]"
+                className="absolute bottom-0 right-0 opacity-9 !z-[0]"
                 style={{ zIndex: -1 }}
                 priority
             />
