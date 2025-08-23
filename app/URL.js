@@ -1,3 +1,3 @@
-const URL = "http://localhost:3300/";
+const URL = "https://qissa.onrender.com/";
 
 export default URL;
