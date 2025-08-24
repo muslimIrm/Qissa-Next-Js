@@ -3,6 +3,12 @@ const axios = require('axios');
 module.exports = {
   siteUrl: 'https://qissa-black.vercel.app',
   generateRobotsTxt: true,
+  robotsTxtOptions: {
+    additionalSitemaps: [
+      'https://qissa-black.vercel.app/rss.xml',
+      'https://qissa-black.vercel.app/atom.xml',
+    ],
+  },
   exclude: ['/dashboard'],
   async additionalPaths() {
     try {
